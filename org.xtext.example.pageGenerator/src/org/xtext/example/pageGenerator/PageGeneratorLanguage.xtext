@@ -1,0 +1,182 @@
+grammar uk.ac.kcl.mdd.cw2.pageGenerator.PageGeneratorLanguare with org.eclipse.xtext.common.Terminals
+
+generate pageGeneratorLanguare "http://www.ac.uk/kcl/mdd/cw2/pageGenerator/PageGeneratorLanguare"
+
+
+WebPage:
+ 	pageElements +=pageElement*
+;
+
+pageElement:
+  SizeDeclaration | ColourRGB | Body | Head | stringDeclaration
+;
+
+Head:
+	{Head} 
+	'Head' '{'
+		headElements += headElement*
+		'}'  
+;
+headElement:
+	Title | Label
+;
+
+Title:
+	'Title' '=' name=STRING ';'
+;
+
+Label:
+	'Description' '=' name=STRING ',' 'lable' '=' label=STRING ';'
+;
+
+
+
+
+Body:
+	{Body}
+	'Body' '{'
+	bodyElements += bodyElement*
+	'}'
+;
+
+bodyElement:
+	Heading | Link | Text | Picture | Section | SizeDeclaration | ColourRGB | stringDeclaration
+;
+
+Heading:
+ 'Heading'  name = ID '<'
+ 'index' '=' index=INT (',')?
+ ('Font-colour' '=' fontColor = primaryColour (',')?)?
+ ('Location' '=' location = locationexpression (',')?)? 
+ ('Padding-left' '=' Lpadding=INT (',')?)?
+ ('Padding-right' '=' Rpadding=INT (',')?)?
+ ('Padding-top' '=' Tpadding=INT (',')?)?
+ ('Padding-bottom' '=' Bpadding=INT (',')?)?
+ '>'
+ '=' title = STRING ';'
+ 
+;
+
+Link:
+ 'Link' name = ID '<'
+ ('target''=' target = STRING (',')?)?
+ ('Padding-left' '=' Lpadding=INT (',')?)?
+ ('Padding-right' '=' Rpadding=INT (',')?)?
+ ('Padding-top' '=' Tpadding=INT (',')?)?
+ ('Padding-bottom' '=' Bpadding=INT (',')?)?
+ ('Font-colour' '=' fontColor = primaryColour (',')?)?
+ ('Font-size' '=' fontSize = INT (',')?)?
+ ('Location' '=' location = locationexpression (',')?)? 
+ '>'
+ '=' url = STRING ';'
+;
+
+Picture:
+ 'Picture' name = ID '<'
+ ('size' '=' size = primarySize (',')?)?
+ ('alternative-text' '=' alt=STRING (',')?)?
+ ('Location' '=' location = locationexpression (',')?)? 
+ ('Padding-left' '=' Lpadding=INT (',')?)?
+ ('Padding-right' '=' Rpadding=INT (',')?)?
+ ('Padding-top' '=' Tpadding=INT (',')?)?
+ ('Padding-bottom' '=' Bpadding=INT (',')?)?
+  '>' 
+ '=' picUrl = STRING (',')? ';'
+;
+
+
+Text:
+ 'Text' name = ID '<' 
+ ('Font-colour' '=' fontColor = primaryColour (',')?)?
+ ('Font-size' '=' fontSize = INT (',')?)?
+  ('Location' '=' location = locationexpression (',')?)? 
+ ('Padding-left' '=' Lpadding=INT (',')?)?
+ ('Padding-right' '=' Rpadding=INT (',')?)?
+ ('Padding-top' '=' Tpadding=INT (',')?)?
+ ('Padding-bottom' '=' Bpadding=INT (',')?)?
+  '>'
+ '=' content = Content ';'
+;
+
+
+
+Section:
+'Section' name=ID '<'
+ ('Background-Colour' '=' bgColor = primaryColour (',')?)? 
+ ('Size' '=' size = primarySize (',')?)? 
+ ('Section-location' '=' location = locationexpression(',')?)? 
+ ('Text-location' '=' textLocation = locationexpression(',')?)? 
+ ('Padding-left' '=' Lpadding=INT (',')?)?
+ ('Padding-right' '=' Rpadding=INT (',')?)?
+ ('Padding-top' '=' Tpadding=INT (',')?)?
+ ('Padding-bottom' '=' Bpadding=INT (',')?)?
+  '>'
+  '{'
+  bodyElements += bodyElement+
+  '}'
+;
+
+locationexpression:
+	location = STRING
+;
+primarySize:
+	SizeExpression | sizeValue
+;
+
+SizeDeclaration:
+   'size' name = ID '=' width = INT '*' height = INT ';'
+;
+
+sizeValue:
+	width = INT '*' height = INT 	
+;
+
+SizeExpression:
+	size = [SizeDeclaration]
+;
+
+primaryColour:
+	ColourExpression | colourValue
+;
+
+colourValue:
+	colour = STRING
+;
+ColourRGB:
+	'Custom' 'colour' name=ID '=' rgb = '(' red=INT ',' green=INT ',' blue=INT')' ';'
+;
+
+ColourExpression:
+	colour = [ColourRGB]
+;
+
+Content:
+	primaryString ({Content.left=current} separator += ('+'|',') right += primaryString)*
+;
+
+primaryString:
+	stringValue|
+	stringReference
+;
+
+stringValue:
+	val=STRING
+;
+
+stringReference:
+	stringreference = [stringDeclaration]
+;
+
+stringDeclaration:
+	'Hightlight-word' name=ID '<'
+	('Font-colour' '=' fontColor = primaryColour (',')?)?
+ 	('Font-size' '=' fontSize = INT (',')?)?
+	'>'
+	'=' word=STRING ';'
+;
+
+
+
+
+
+

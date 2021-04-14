@@ -1,0 +1,31 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: org.xtext.example.pageGenerator
+Bundle-ManifestVersion: 2
+Bundle-Name: org.xtext.example.pageGenerator
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: org.xtext.example.pageGenerator; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.eclipse.xtext.util,
+ org.eclipse.emf.common,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
+ org.eclipse.xsemantics.runtime;bundle-version="1.20.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: uk.ac.kcl.mdd.cw2.pageGenerator.parser.antlr.internal,
+ uk.ac.kcl.mdd.cw2.pageGenerator.parser.antlr,
+ uk.ac.kcl.mdd.cw2.pageGenerator.validation,
+ uk.ac.kcl.mdd.cw2.pageGenerator.pageGeneratorLanguare,
+ uk.ac.kcl.mdd.cw2.pageGenerator.serializer,
+ uk.ac.kcl.mdd.cw2.pageGenerator.services,
+ uk.ac.kcl.mdd.cw2.pageGenerator,
+ uk.ac.kcl.mdd.cw2.pageGenerator.generator,
+ uk.ac.kcl.mdd.cw2.pageGenerator.pageGeneratorLanguare.impl,
+ uk.ac.kcl.mdd.cw2.pageGenerator.pageGeneratorLanguare.util,
+ uk.ac.kcl.mdd.cw2.pageGenerator.scoping
+Import-Package: org.apache.log4j,
+ org.eclipse.xtext.ui.editor.quickfix

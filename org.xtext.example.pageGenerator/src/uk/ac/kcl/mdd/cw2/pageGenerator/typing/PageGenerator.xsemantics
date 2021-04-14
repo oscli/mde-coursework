@@ -1,0 +1,41 @@
+import uk.ac.kcl.mdd.cw2.pageGenerator.pageGeneratorLanguare.colourValue
+import uk.ac.kcl.mdd.cw2.pageGenerator.pageGeneratorLanguare.primaryColour
+
+import uk.ac.kcl.mdd.cw2.pageGenerator.validation.AbstractPageGeneratorLanguareValidator
+
+system uk.ac.kcl.mdd.cw2.pageGenerator.typing.PageGeneratorTypeSystem
+
+validatorExtends AbstractPageGeneratorLanguareValidator 
+
+judgments{
+	Color |- primaryColour colour : output PageGeneratorType
+		cached
+		error "Colour should be a (INT,INT,INT),0<INT<255 or a STRING, but not" + stringRep(colour)
+	subType |- PageGeneratorType left <:PageGeneratorType right
+		error stringRep(left) + "is not a subtype of" + stringRep(right)
+}
+
+axiom Pcolour
+	G |-  colourValue colour : PageGeneratorType.Colour
+	
+	
+rule SubTyping
+	G |- PageGeneratorType left <: PageGeneratorType right
+from{
+	right === PageGeneratorType.Colour or left === right
+}
+
+checkrule checkColourStatement for
+	colourValue colour
+from{
+	empty |- colour : var PageGeneratorType colourName
+	empty |- colourName <: PageGeneratorType.Colour
+}
+
+	
+	
+
+
+
+	
+
