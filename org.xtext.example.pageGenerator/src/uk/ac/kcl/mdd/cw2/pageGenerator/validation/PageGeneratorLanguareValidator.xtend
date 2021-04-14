@@ -49,7 +49,7 @@ class PageGeneratorLanguareValidator extends PageGeneratorTypeSystemValidator {
 		}
 	}
 
-	 @Check def void checkTitleString(locationexpression location) {
+	 @Check def void checkLocation(locationexpression location) {
 		if (!location.getLocation().equals("left") && !location.getLocation().equals("right") &&
 			!location.getLocation().equals("center")) {
 			warning("Title should be left,right or center",
