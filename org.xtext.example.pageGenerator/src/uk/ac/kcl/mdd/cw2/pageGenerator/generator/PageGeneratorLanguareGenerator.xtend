@@ -118,7 +118,7 @@ class PageGeneratorLanguareGenerator extends AbstractGenerator {
 	«if (section.size !== null) '''«generateSizeExpression(section.size, 'height')»'''»
 	«if (section.size !== null) '''«generateSizeExpression(section.size, 'width')»'''»
 	«if (section.location !== null) '''float:«section.location.location»;'''»
-	«if (section.textLocation !== null) '''text-align:«section.textLocation»;'''»
+	«if (section.textLocation !== null) '''text-align:«section.textLocation.location»;'''»
 	«if (section.lpadding !== 0) '''padding-left:«section.lpadding»px;'''»
 	«if (section.rpadding !== 0) '''padding-right:«section.rpadding»px;'''»
 	«if (section.tpadding !== 0) '''padding-top:«section.tpadding»px;'''else '''padding-top:1px'''»
