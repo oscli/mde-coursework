@@ -1,10 +1,10 @@
 # mde-coursework
 
 ## Instructions for use:
-
-  ### In running time eclipse, you can create a file which is end by .pageGenerator
-  ### After you complte your programming, save it and go src-gen folder. You will find a html file whose file name is same as the file name that you defined for pageGenerator file.
-  ### Open the HTML file, you can see the result of your program
+  ### warning: You may need to create some empty folder before using
+  ### 1. In running time eclipse, you can create a file which is end by .pageGenerator
+  ### 2. After you complte your programming, save it and go src-gen folder. You will find a html file whose file name is same as the file name that you defined for pageGenerator file.
+  ### 3. Open the HTML file, you can see the result of your program
   
   
 ## Test code:
